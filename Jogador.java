@@ -1,15 +1,13 @@
 
 public class Jogador {
 	Creditos money;
-	Placar pontos;
+	Aposta bet;
 	Carta[] mao;
-	int aposta;
 	
 	public Jogador() {
 		mao = new Carta[5];
-		pontos = new Placar();
+		bet = new Aposta(0);
 		money = new Creditos(200);
-		aposta = 0;
 		this.generateMao();
 	}
 	
@@ -35,21 +33,47 @@ public class Jogador {
 		money.setCreditos(k);
 	}
 	
-	public int getAposta() {
-		return aposta;
-	}
-	
 	public void setAposta(int k) {
-		aposta = k;
+		bet.setAposta(k);
 	}
 	
-	public int cashIn() {
-		return this.pontos.calcular(mao);
+	public int getAposta() {
+		return bet.getAposta();
+	}
+	
+	
+	//Altera o numero de creditos para o que tenho na carteira + a aposta * o multiplicador
+	public void cashIn() {
+		this.money.setCreditos(this.bet.calcular(mao) + money.getCreditos());
 	}
 	
 	@Override
 	public java.lang.String toString(){
-
+		for(int i  = 0; i < 5; i ++) {
+			mao[i].getLine1();
+			System.out.print("   ");
+		}
+		System.out.println();
+		for(int i  = 0; i < 5; i ++) {
+			mao[i].getLine2();
+			System.out.print("   ");
+		}
+		System.out.println();
+		for(int i  = 0; i < 5; i ++) {
+			mao[i].getLine3();
+			System.out.print("   ");
+		}
+		System.out.println();
+		for(int i  = 0; i < 5; i ++) {
+			mao[i].getLine4();
+			System.out.print("   ");
+		}
+		System.out.println();
+		for(int i  = 0; i < 5; i ++) {
+			mao[i].getLine5();
+			System.out.print("   ");
+		}
+		System.out.println();
 		return"";
 	}
 	
