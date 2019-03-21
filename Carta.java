@@ -37,30 +37,48 @@ public class Carta {
 		this.numero = numero;
 	}
 	
+	private String getNumber(int n) {
+		if(n < 9) {
+			return Integer.toString(n);
+		}
+		if(n == 9) {
+			return "0";
+		}
+		switch(n%9) {
+			case 1:
+				return "J";
+			case 2:
+				return "Q";
+			case 3:
+				return "K";
+			case 4:
+				return "A";
+		}
+		return "";
+	}
+	
+	private String getSymbol(int n) {
+		switch(n) {
+		case 0:
+			return "@";
+		case 1:
+			return "#";
+		case 2:
+			return "$";
+		case 3:
+			return "%";
+			
+		}
+		return "";
+	}
 	public void getLine1() {
 		System.out.print("+-----+");
 	}
 	public void getLine2() {
-		System.out.print("|  " + numero + "  |");
+		System.out.print("|  " + getNumber(numero) + "  |");
 	}
 	public void getLine3() {
-		System.out.print("|  ");
-		switch(naipe) {
-			case 0:
-				System.out.print("@");
-				break;
-			case 1:
-				System.out.print("#");
-				break;
-			case 2:
-				System.out.print("$");
-				break;
-			case 3:
-				System.out.print("%");
-				break;
-				
-		}
-		System.out.print("  |");
+		System.out.print("|  " + getSymbol(naipe) +"  |");
 	}
 	public void getLine4() {
 		System.out.print("|     |");
