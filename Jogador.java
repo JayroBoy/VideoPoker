@@ -1,12 +1,12 @@
 
 public class Jogador {
 	Creditos money;
-	Aposta bet;
+	Multiplicador mult;
 	Carta[] mao;
 	/*Método construtor que cria um vetor de cartas, placar e créditos */
 	public Jogador() {
 		mao = new Carta[5];
-		bet = new Aposta(0);
+		mult = new Multiplicador();
 		money = new Creditos(200);
 		this.generateMao();
 	}
@@ -41,55 +41,13 @@ public class Jogador {
 		money.setCreditos(k);
 	}
 	/**
-	 *@param k - atribui o valor k a aposta
+	 * manda as cartas para o placar e ele devolve o multiplicador
+	 * @return o multiplicador
 	 */
-	public void setAposta(int k) {
-		bet.setAposta(k);
-	}
-	/**
-	 *@return k - return o valor da aposta
-	 */
-	public int getAposta() {
-		return bet.getAposta();
+	public int cashIn() {
+		return this.mult.calcular(mao);
 	}
 	
 	
-	/**
-	*Altera o numero de creditos para o que tenho na carteira + a aposta * o multiplicador
-	*@return o tanto de creditos que o jogador ganhou
-	*/
-	public void cashIn() {
-		this.money.setCreditos(this.bet.calcular(mao) + money.getCreditos());
-	}
-	
-	@Override
-	public java.lang.String toString(){
-		for(int i  = 0; i < 5; i ++) {
-			mao[i].getLine1();
-			System.out.print("   ");
-		}
-		System.out.println();
-		for(int i  = 0; i < 5; i ++) {
-			mao[i].getLine2();
-			System.out.print("   ");
-		}
-		System.out.println();
-		for(int i  = 0; i < 5; i ++) {
-			mao[i].getLine3();
-			System.out.print("   ");
-		}
-		System.out.println();
-		for(int i  = 0; i < 5; i ++) {
-			mao[i].getLine4();
-			System.out.print("   ");
-		}
-		System.out.println();
-		for(int i  = 0; i < 5; i ++) {
-			mao[i].getLine5();
-			System.out.print("   ");
-		}
-		System.out.println();
-		return"";
-	}
 	
 }

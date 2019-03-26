@@ -1,4 +1,3 @@
-
 public class Carta {
 	
 	int naipe, numero;
@@ -36,7 +35,10 @@ public class Carta {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
+	/**
+	 * @param n - integer a ser convertido pra string
+	 * @return - pode ser a string aquivalente ao numero n ou vazio
+	 * */
 	private String getNumber(int n) {
 		if(n < 9) {
 			return Integer.toString(n);
@@ -56,7 +58,10 @@ public class Carta {
 		}
 		return "";
 	}
-	
+	/**
+	 * @param n - indica o naipe
+	 * @return - naipe em caracter
+	 * */
 	private String getSymbol(int n) {
 		switch(n) {
 		case 0:
@@ -71,6 +76,10 @@ public class Carta {
 		}
 		return "";
 	}
+	
+	/*
+	 * funções auxiliares para mostrar a Carta
+	 * */
 	public void getLine1() {
 		System.out.print("+-----+");
 	}
@@ -101,5 +110,4 @@ public class Carta {
 		
 		return "";
 	}
-	
 }

@@ -18,7 +18,11 @@ public class Dealer {
 				}
 			}
 		}
-		
+		/**
+		 * essa função da uma nova carta do baralho
+		 * @return nova carta
+		 * 
+		 * */
 		public Carta getCard(){
 			int naipe, numero;
 			Carta result = new Carta();

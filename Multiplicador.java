@@ -1,19 +1,20 @@
 
-public class Aposta {
+public class Multiplicador {
 
 	private int mult, numero, naipe, par, trinca, quadra;
 	private int[] freqnumero;
 	private int[] freqnaipe;
-	private int aposta;
-	
-	public Aposta(int bet){
-		aposta = bet;
-		mult = 0;
-		par = 0;
-		trinca = 0;
-		quadra = 0;
-		freqnumero = new int[13];
-		freqnaipe = new int[4];
+
+	/*
+	 * Método Construtor que inicia todas as variaveis da classe com 0, dado
+	 * */
+	public Multiplicador(){
+		mult = 0;	//retorno
+		par = 0;	//indica pares
+		trinca = 0; //indica trinca
+		quadra = 0; //indica quadra
+		freqnumero = new int[13]; //vetor para contar frequencia de cada número
+		freqnaipe = new int[4];	  //vetor para contar frequencia de cada naipe
 		for(int i = 0; i < 13; i++) {
 			freqnumero[i] = 0;
 		}
@@ -22,21 +23,19 @@ public class Aposta {
 		}
 		
 	}
-	
-	public void setAposta(int k) {
-		aposta = k;
-	}
-	
-	public int getAposta() {
-		return aposta;
-	}
-	
+	/*Método que calcula a pontuação dado a sequencia de cartas que o 
+	 * jogador tem
+	 * @param Carta[] card tor com as 5 cartas que o jogador tem
+	 * @return O quanto o valor da aposta será multiplicado 
+	 * */
 	public int calcular( Carta[] card) {
 	
+		//percorre o vetor de cartas para indicar quais cartas estao na mao do jogador
 		for(int i = 0; i < 5; i++) {
 			naipe = card[i].getNaipe();
 			numero = card[i].getNumero();
 			
+			/*o vetor de frequencias do naipe é incrementado conforme aparece determinado naipe no vetor de cartas*/
 			switch(naipe) {
 				case 0:
 					freqnaipe[0] +=1;
@@ -53,7 +52,7 @@ public class Aposta {
 				default:
 					break;
 				}
-					
+			/*o vetor de frequencias dos numeros é incrementado conforme aparecem no vetor de cartas*/	
 				switch(numero) {
 				case 0:
 					freqnumero[0] +=1;
@@ -96,21 +95,24 @@ public class Aposta {
 				default:
 					break;
 				}
-			}			
-		numero = 0;
-		naipe = 0;
+			}
+		//zera as variaveis para reutilizá-las
+		numero = 0; //indica sequencia
+		naipe = 0;	//indica naipe
 		
+		//percorre o vetor de numeros para procurar as combinações que premiam o jogador
 		for(int i = 0; i < 13; i++) {
 			if(freqnumero[i] == 2) par++;
 			if(freqnumero[i] == 3) trinca++;
 			else if(freqnumero[i] == 4) quadra++;
 			else if(freqnumero[i] == 1 && (freqnumero[i-1] == 1 || i-1<0)) numero++;
 		}
-		
+		//percorre o vetor de naipes para procurar as combinações que premiam o jogador
 		for(int i = 0; i <4; i++) {
 			if(freqnaipe[i] == 1 && (freqnaipe[i-1] == 1 || i-1<0)) naipe ++;
 		}
 		
+		//atribuir a pontuação de acordo com as combinações 
 		if (par == 2) mult = 1;	//dois pares
 		if (naipe == 5) mult = 10; //flush
 		else if (trinca == 1) { 
@@ -126,7 +128,7 @@ public class Aposta {
 			else if(naipe < 5) mult = 5; //straight
 		}
 		
-		return mult * aposta;
+		return mult;
 		
 	}
 }
