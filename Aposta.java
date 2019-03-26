@@ -103,11 +103,12 @@ public class Aposta {
 		for(int i = 0; i < 13; i++) {
 			if(freqnumero[i] == 2) par++;
 			if(freqnumero[i] == 3) trinca++;
-			else if(freqnumero[i] == 4) quadra++;
-			else if(freqnumero[i] == 1 && (freqnumero[i-1] == 1 || i-1<0)) numero++;
+			if(freqnumero[i] == 4) quadra++;
+				if(i > 0)
+					if(freqnumero[i] == 1 && (freqnumero[i-1] == 1 || i-1<0)) numero++;
 		}
 		
-		for(int i = 0; i <4; i++) {
+		for(int i = 1; i < 4; i++) {
 			if(freqnaipe[i] == 1 && (freqnaipe[i-1] == 1 || i-1<0)) naipe ++;
 		}
 		

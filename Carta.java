@@ -40,13 +40,13 @@ public class Carta {
 	 * @return - pode ser a string aquivalente ao numero n ou vazio
 	 * */
 	private String getNumber(int n) {
-		if(n < 9) {
-			return Integer.toString(n);
+		if(n < 8) {
+			return Integer.toString(n + 2);
 		}
-		if(n == 9) {
+		if(n == 8) {
 			return "0";
 		}
-		switch(n%9) {
+		switch(n%8) {
 			case 1:
 				return "J";
 			case 2:
@@ -59,7 +59,8 @@ public class Carta {
 		return "";
 	}
 	/**
-	 * @param n - indica o naipe
+	 * @param n - indica o nai
+	 * pe
 	 * @return - naipe em caracter
 	 * */
 	private String getSymbol(int n) {
