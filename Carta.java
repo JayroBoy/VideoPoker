@@ -4,8 +4,8 @@ public class Carta {
 	//Naipe: Paus, Copas, Espadas, Ouros;
 	//Numero: 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
 	public Carta() {
-		naipe = 0;
-		numero = 0;
+		naipe = -1;
+		numero = -1;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class Carta {
 	}
 	
 	/*
-	 * funções auxiliares para mostrar a Carta
+	 * funÃ§Ãµes auxiliares para mostrar a Carta
 	 * */
 	public void getLine1() {
 		System.out.print("+-----+");

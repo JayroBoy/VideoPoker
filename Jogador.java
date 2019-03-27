@@ -50,12 +50,15 @@ public class Jogador {
 	 *@param int k, o tanto que vale a aposta
 	 *set a aposta e desconta esse valor do que saldo anterior
 	 */
-	public void setAposta(int k) throws IllegalArgumentException{
+	public int setAposta(int k) throws IllegalArgumentException{
 		if(k <= this.getCreditos() ) {
-			this.money.setCreditos(this.getCreditos() - k);
 			this.bet.setAposta(k);
+			System.out.println("Aposta no valor de "+k+" créditos feita com sucesso!");
+			this.setCreditos(this.getCreditos() - k);
+			System.out.println("Saldo:" + this.getCreditos());
 		}else throw new IllegalArgumentException("Valor não possuído");
 		
+		return 1;
 	}
 
 	@Override

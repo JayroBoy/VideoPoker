@@ -12,6 +12,10 @@ public class Dealer {
 		 * */
 		public Dealer() {
 			isOnDeck = new boolean[4][13];
+			reshuffleDeck();
+		}
+		
+		public void reshuffleDeck() {
 			for(int i = 0; i < 4; i++) {
 				for(int j = 0; j < 13; j++) {
 					isOnDeck[i][j] = true;

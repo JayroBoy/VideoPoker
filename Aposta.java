@@ -1,7 +1,7 @@
 
 public class Aposta {
 
-	private int mult, numero, naipe, par, trinca, quadra;
+	private int mult, numero, naipe, par;
 	private int[] freqnumero;
 	private int[] freqnaipe;
 	private int aposta;
@@ -10,19 +10,10 @@ public class Aposta {
 	 * */
 	public Aposta(int bet){
 		aposta = bet;
-		mult = 0;
-		par = 0;
-		trinca = 0;
-		quadra = 0;
 		freqnumero = new int[13];
 		freqnaipe = new int[4];
-		for(int i = 0; i < 13; i++) {
-			freqnumero[i] = 0;
-		}
-		for(int i = 0; i < 4; i++) {
-			freqnaipe[i] = 0;
-		}
-		
+		refresh();
+
 	}
 	/**
 	 *@param int k, o tanto que vale a aposta 
@@ -38,12 +29,25 @@ public class Aposta {
 		return aposta;
 	}
 	
+	public void refresh() {
+		mult = 0;
+		par = 0;
+		for(int i = 0; i < 13; i++) {
+			freqnumero[i] = 0;
+		}
+		for(int i = 0; i < 4; i++) {
+			freqnaipe[i] = 0;
+		}
+	}
+	
 	/*Método que calcula a pontuação dado a sequencia de cartas que o 
 	 * jogador tem
 	 * @param Carta[] card tor com as 5 cartas que o jogador tem
 	 * @return o tanto de fichas ganhas com a aposta
 	 * */
 	public int calcular( Carta[] card) {
+		boolean doisPares, trinca, fullHouse, quadra, flush, straightB;
+		int straight;
 		/*percorre o vetor de cartas para indicar quais cartas estao na mao do jogador*/
 		for(int i = 0; i < 5; i++) {
 			naipe = card[i].getNaipe();
@@ -51,95 +55,146 @@ public class Aposta {
 			/*o vetor de frequencias do naipe é incrementado conforme aparece determinado naipe no vetor de cartas*/
 			switch(naipe) {
 				case 0:
-					freqnaipe[0] +=1;
-				break;
+					freqnaipe[0]++;
+					break;
 				case 1:
-					freqnaipe[1] +=1;
+					freqnaipe[1]++;
 					break;
 				case 2:
-					freqnaipe[2] +=1;
+					freqnaipe[2]++;
 					break;
 				case 3:
-					freqnaipe[3] +=1;
+					freqnaipe[3]++;
 					break;
 				default:
 					break;
 				}
 			/*o vetor de frequencias dos numeros é incrementado conforme aparecem no vetor de cartas*/	
 				switch(numero) {
-				case 0:
-					freqnumero[0] +=1;
-				break;
-				case 1:
-					freqnumero[1] +=1;
-					break;
-				case 2:
-					freqnumero[2] +=1;
-					break;
-				case 3:
-					freqnumero[3] +=1;
-					break;
-				case 4:
-					freqnumero[4] +=1;
-				break;
-				case 5:
-					freqnumero[5] +=1;
-					break;
-				case 6:
-					freqnumero[6] +=1;
-					break;
-				case 7:
-					freqnumero[7] +=1;
-					break;
-				case 8:
-					freqnumero[8] +=1;
-				break;
-				case 9:
-					freqnumero[9] +=1;
-					break;
-				case 10:
-					freqnumero[10] +=1;
-					break;
-				case 11:
-					freqnumero[11] +=1;
-					break;
-				case 12:
-					freqnumero[12] +=1;
-				default:
-					break;
+					case 0:
+						freqnumero[0]++;
+						break;
+					case 1:
+						freqnumero[1]++;
+						break;
+					case 2:
+						freqnumero[2]++;
+						break;
+					case 3:
+						freqnumero[3]++;
+						break;
+					case 4:
+						freqnumero[4]++;
+						break;
+					case 5:
+						freqnumero[5]++;
+						break;
+					case 6:
+						freqnumero[6]++;
+						break;
+					case 7:
+						freqnumero[7]++;
+						break;
+					case 8:
+						freqnumero[8]++;
+						break;
+					case 9:
+						freqnumero[9]++;
+						break;
+					case 10:
+						freqnumero[10]++;
+						break;
+					case 11:
+						freqnumero[11]++;
+						break;
+					case 12:
+						freqnumero[12]++;
+						break;
+					default:
+						break;
 				}
-			}	
-		/*zera as variaveis para reutilizá-las*/
-		numero = 0;
-		naipe = 0;
+			}
+		
+		//Iniciando as variáveis
+
+		flush = false;
+		straightB = false;
+		trinca = false;
+		quadra = false;
+		doisPares = false;
+		fullHouse = false;
+		straight = 0;
+		
 		/*percorre o vetor de numeros para procurar as combinações que premiam o jogador*/
 		for(int i = 0; i < 13; i++) {
-			if(freqnumero[i] == 2) par++;
-			if(freqnumero[i] == 3) trinca++;
-			if(freqnumero[i] == 4) quadra++;
-				if(i > 0)
-					if(freqnumero[i] == 1 && (freqnumero[i-1] == 1 || i-1<0)) numero++;
+			if(freqnumero[i] == 2) {
+				par++;
+			}
+			if(freqnumero[i] == 3) {
+				trinca = true;
+			}
+			if(freqnumero[i] == 4) {
+				quadra = true;
+			}
+			if(i > 0) {
+				if((freqnumero[i] == freqnumero[i-1] && freqnumero[i] == 1)) {
+					straight++;
+				}
+			}
+		}
+		
+		if(par == 2) {
+			doisPares = true;
+		}else if(par == 1 && trinca) {
+			fullHouse = true;
+		}
+		
+		if(straight > 3) {
+			straightB = true;
 		}
 		
 		//percorre o vetor de naipes para procurar as combinações que premiam o jogador
-		for(int i = 1; i < 4; i++) {
-			if(freqnaipe[i] == 1 && (freqnaipe[i-1] == 1 || i-1<0)) naipe ++;
+
+		
+		for(int i = 0; i < 4; i++) {
+			if(freqnaipe[i] == 5) {
+				flush = true;
+			}
 		}
 		
+		mult = 0;
 		/*atribuir a pontuação de acordo com as combinações */
-		if (par == 2) mult = 1;	//dois pares
-		if (naipe == 5) mult = 10; //flush
-		else if (trinca == 1) { 
-			if(par == 1) mult = 20; //full hand
-			else if (par == 0) mult = 2; //trinca
-		}
-		else if(quadra == 1) mult = 50; //quadra
-		else if(numero == 5) {
-			if(naipe == 5) {
-				if(freqnumero[12] == 1) mult = 200; //royal straight flush
-				else mult = 100;//straight flush
-			}	
-			else if(naipe < 5) mult = 5; //straight
+		
+		
+		if (doisPares) {
+			mult = 1;	//dois pares
+			System.out.println("Dois Pares!");
+		}if(trinca && !fullHouse) {
+			mult = 2; //trinca
+			System.out.println("Trinca!");
+		}if (flush && !straightB) {
+			mult = 10; //flush
+			System.out.println("Flush!");
+		}if (fullHouse) { 
+			mult = 20; //full hand
+			System.out.println("Full House!");
+		}if(quadra) {
+			mult = 50; //quadra
+			System.out.println("Quadra!");
+		}if(straightB) {
+			if(!flush) {
+				mult = 5; //straight
+				System.out.println("Straight!");
+			}else{
+				if(freqnumero[12] == 0) {
+					mult = 100;//straight flush
+					System.out.println("Straight Flush!");
+				}else {
+					mult = 200; //royal straight flush
+					System.out.println("Royal Flush!");
+				}
+
+			}
 		}
 		
 		return mult * aposta;

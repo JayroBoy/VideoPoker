@@ -1,13 +1,26 @@
-import java.io.IOException;
-
+//import java.io.IOException;
+/**
+ * 
+ * @author Jayro 9762880
+ * @author Laura Genari 10801180
+ *
+ */
 public class Poker {
 	/*
 	 * função que limpa o terminal
-	 */
+	 * nao funcionou :(
+	 
 	public static void clearScreen() throws IOException {
 		System.out.flush();  
 	   }
+	   
+	*/
 	/*main*/
+	/**
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main (String args[]) throws Exception {
 	
 		String enter;
@@ -15,7 +28,7 @@ public class Poker {
 		int aposta=-1, vez = 2, b = 0;
 		Dealer dealer = new Dealer();
 		Carta[] auxiliar = new Carta[5];
-		
+//		int teste = 0;
 
 		System.out.println("Bem vindo ao Video poker. Digite show para iniciar a rodada, ou qualquer outra tecla para sair");
 		
@@ -23,6 +36,8 @@ public class Poker {
 		
 		/*se o usuario digitar show, entra no loop que é o jogo*/
 		while (enter.equals("show") && player.getCreditos() > 0) {
+			dealer.reshuffleDeck();
+			player.bet.refresh();
 			/*o dealer da as cartas para o jogador*/
 			for(int i = 0; i < 5; i++) {
 				auxiliar[i] = dealer.getCard();
@@ -32,24 +47,25 @@ public class Poker {
 			vez = 2;
 			System.out.println("Voce tem "+player.getCreditos()+" créditos");
 			
-			System.out.println("Faça sua aposta (entre 1 e 200)");
+			System.out.println("Faça sua aposta (entre 1 e "+player.getCreditos()+")");
+			
+			
+			/*se a aposta for invalida, fica nesse loop até o jogador digitar um valor válido*/
+			while(aposta < 1 || aposta > player.getCreditos()) {
+				aposta = EntradaTeclado.leInt();
+				//System.out.println("flag" + ++teste);
+				
+				if(aposta <= 0 || aposta > player.getCreditos()) {
+					System.out.println("Insira uma aposta válida!");
+				}
+			}
+			
+			player.setAposta(aposta);
 			
 			/*este loop representa o tanto de de vezes que o jogador pode trocar as cartas, sendo também a partida*/
-			while(vez > 0) {
-				
-				/*se a aposta for invalida, fica nesse loop até o jogador digitar um valor válido*/
-				while(aposta < 1 || aposta > player.money.getCreditos()) {
-					aposta = EntradaTeclado.leInt();
-				
-					if (aposta <= 0 || aposta > player.money.getCreditos()) {
-						System.out.println("Insira uma aposta válida!");
-						aposta = EntradaTeclado.leInt();					
-					}
-					player.setAposta(aposta);
-				}
-				
+			while(vez > 0) {	
 				/*limpa o terminal*/
-				clearScreen();
+				//clearScreen();
 				
 				/*mostra as cartas do jogador*/
 				player.toString();
