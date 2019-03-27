@@ -1,12 +1,14 @@
 import java.util.Random;
 
-/**Classe que gerencia o baralho. 
+/**
+ *Classe que gerencia o baralho. 
  * */
 public class Dealer {
 		boolean[][] isOnDeck;
 		Random rand = new Random();
 		
-		/**Construtor. Inicializa o baralho.
+		/**
+		 * Construtor. Inicializa o baralho.
 		 * Linhas: Paus, Copas, Espadas, Ouros
 		 * Colunas: 2, 3, 4, 5, 6, 7, 9, 10, J, Q, K, A 
 		 * */
@@ -14,7 +16,9 @@ public class Dealer {
 			isOnDeck = new boolean[4][13];
 			reshuffleDeck();
 		}
-		
+		/**
+		* função que reembaralha as cartas
+		*/
 		public void reshuffleDeck() {
 			for(int i = 0; i < 4; i++) {
 				for(int j = 0; j < 13; j++) {
@@ -23,7 +27,7 @@ public class Dealer {
 			}
 		}
 		/**
-		 * essa fun��o da uma nova carta do baralho
+		 * essa função da uma nova carta do baralho
 		 * @return nova carta
 		 * 
 		 * */
