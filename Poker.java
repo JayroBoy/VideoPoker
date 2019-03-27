@@ -6,18 +6,8 @@
  *
  */
 public class Poker {
-	/*
-	 * funÁ„o que limpa o terminal
-	 * nao funcionou :(
-	 
-	public static void clearScreen() throws IOException {
-		System.out.flush();  
-	   }
-	   
-	*/
 	/*main*/
 	/**
-	 * 
 	 * @param args
 	 * @throws Exception
 	 */
@@ -28,13 +18,12 @@ public class Poker {
 		int aposta=-1, vez = 2, b = 0;
 		Dealer dealer = new Dealer();
 		Carta[] auxiliar = new Carta[5];
-//		int teste = 0;
 
 		System.out.println("Bem vindo ao Video poker. Digite show para iniciar a rodada, ou qualquer outra tecla para sair");
 		
 		enter = EntradaTeclado.leString();
 		
-		/*se o usuario digitar show, entra no loop que È o jogo*/
+		/*se o usuario digitar show, entra no loop que √© o jogo*/
 		while (enter.equals("show") && player.getCreditos() > 0) {
 			dealer.reshuffleDeck();
 			player.bet.refresh();
@@ -45,37 +34,34 @@ public class Poker {
 			player.setMao(auxiliar);
 			aposta = -1;
 			vez = 2;
-			System.out.println("Voce tem "+player.getCreditos()+" crÈditos");
+			System.out.println("Voce tem "+player.getCreditos()+" cr√©ditos");
 			
-			System.out.println("FaÁa sua aposta (entre 1 e "+player.getCreditos()+")");
+			System.out.println("Fa√ßa sua aposta (entre 1 e "+player.getCreditos()+")");
 			
 			
-			/*se a aposta for invalida, fica nesse loop atÈ o jogador digitar um valor v·lido*/
+			/*se a aposta for invalida, fica nesse loop at√© o jogador digitar um valor v√°lido*/
 			while(aposta < 1 || aposta > player.getCreditos()) {
 				aposta = EntradaTeclado.leInt();
-				//System.out.println("flag" + ++teste);
 				
 				if(aposta <= 0 || aposta > player.getCreditos()) {
-					System.out.println("Insira uma aposta v·lida!");
+					System.out.println("Insira uma aposta v√°lida!");
 				}
 			}
 			
 			player.setAposta(aposta);
 			
-			/*este loop representa o tanto de de vezes que o jogador pode trocar as cartas, sendo tambÈm a partida*/
+			/*este loop representa o tanto de de vezes que o jogador pode trocar as cartas, sendo tamb√©m a partida*/
 			while(vez > 0) {	
-				/*limpa o terminal*/
-				//clearScreen();
-				
+								
 				/*mostra as cartas do jogador*/
 				player.toString();
 				
-				System.out.println("VocÍ pode trocar de carta "+vez+" vez(es). Deseja troc·-la? (S/N)");
+				System.out.println("Voc√™ pode trocar de carta "+vez+" vez(es). Deseja troc√°-la? (S/N)");
 				
 				enter = EntradaTeclado.leString();
-				/*se o jogador digitar um opÁ„o inv·lida, fica nesse loop atÈ digitar s/S ou n/N*/
+				/*se o jogador digitar um op√ß√£o inv√°lida, fica nesse loop at√© digitar s/S ou n/N*/
 				while(!enter.equals("s") && !enter.equals("S") && !enter.equals("N") && !enter.equals("n")) {
-					System.out.println("Insira uma opÁao v·lida!(S/N)");
+					System.out.println("Insira uma op√ßao v√°lida!(S/N)");
 					enter = EntradaTeclado.leString();
 				}
 				
@@ -135,10 +121,10 @@ public class Poker {
 			/*atualiza o saldo*/
 			player.cashIn();
 			
-			System.out.println("VocÍ ganhou "+ (player.getCreditos() - b)  +" fichas");
-			System.out.println("Seu saldo atual È de " + player.getCreditos() + " fichas"  );
+			System.out.println("Voc√™ ganhou "+ (player.getCreditos() - b)  +" fichas");
+			System.out.println("Seu saldo atual √© de " + player.getCreditos() + " fichas"  );
 			
-			System.out.println("Deseja jogar novamente? Se sim digite show, caso contr·rio pressione qualquer outra tecla");
+			System.out.println("Deseja jogar novamente? Se sim digite show, caso contr√°rio pressione qualquer outra tecla");
 			enter = EntradaTeclado.leString();
 		}
 	}
