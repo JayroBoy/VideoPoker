@@ -5,9 +5,9 @@ public class Aposta {
 	private int[] freqnumero;
 	private int[] freqnaipe;
 	private int aposta;
-	/*
-	 * Método Construtor que inicia todas as variaveis da classe com 0
-	 * */
+	/**
+	 * MÃ©todo Construtor que inicia todas as variaveis da classe com 0
+	 */
 	public Aposta(int bet){
 		aposta = bet;
 		freqnumero = new int[13];
@@ -40,7 +40,7 @@ public class Aposta {
 		}
 	}
 	
-	/*Método que calcula a pontuação dado a sequencia de cartas que o 
+	/**MÃ©todo que calcula a pontuaÃ§Ã£o dado a sequencia de cartas que o 
 	 * jogador tem
 	 * @param Carta[] card tor com as 5 cartas que o jogador tem
 	 * @return o tanto de fichas ganhas com a aposta
@@ -52,7 +52,7 @@ public class Aposta {
 		for(int i = 0; i < 5; i++) {
 			naipe = card[i].getNaipe();
 			numero = card[i].getNumero();
-			/*o vetor de frequencias do naipe é incrementado conforme aparece determinado naipe no vetor de cartas*/
+			/*o vetor de frequencias do naipe Ã© incrementado conforme aparece determinado naipe no vetor de cartas*/
 			switch(naipe) {
 				case 0:
 					freqnaipe[0]++;
@@ -69,7 +69,7 @@ public class Aposta {
 				default:
 					break;
 				}
-			/*o vetor de frequencias dos numeros é incrementado conforme aparecem no vetor de cartas*/	
+			/*o vetor de frequencias dos numeros Ã© incrementado conforme aparecem no vetor de cartas*/	
 				switch(numero) {
 					case 0:
 						freqnumero[0]++;
@@ -115,7 +115,7 @@ public class Aposta {
 				}
 			}
 		
-		//Iniciando as variáveis
+		//Iniciando as variÃ¡veis
 
 		flush = false;
 		straightB = false;
@@ -125,7 +125,7 @@ public class Aposta {
 		fullHouse = false;
 		straight = 0;
 		
-		/*percorre o vetor de numeros para procurar as combinações que premiam o jogador*/
+		/*percorre o vetor de numeros para procurar as combinaÃ§Ãµes que premiam o jogador*/
 		for(int i = 0; i < 13; i++) {
 			if(freqnumero[i] == 2) {
 				par++;
@@ -153,7 +153,7 @@ public class Aposta {
 			straightB = true;
 		}
 		
-		//percorre o vetor de naipes para procurar as combinações que premiam o jogador
+		//percorre o vetor de naipes para procurar as combinaÃ§Ãµes que premiam o jogador
 
 		
 		for(int i = 0; i < 4; i++) {
@@ -163,7 +163,7 @@ public class Aposta {
 		}
 		
 		mult = 0;
-		/*atribuir a pontuação de acordo com as combinações */
+		/*atribuir a pontuaÃ§Ã£o de acordo com as combinaÃ§Ãµes */
 		
 		
 		if (doisPares) {
