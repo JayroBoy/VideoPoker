@@ -3,14 +3,18 @@ public class Jogador {
 	Creditos money;
 	Aposta bet;
 	Carta[] mao;
-	/*Método construtor que cria um vetor de cartas, placar e créditos */
+	/**
+	* MÃ©todo construtor que cria um vetor de cartas, placar e crÃ©ditos 
+	*/
 	public Jogador() {
 		mao = new Carta[5];
 		bet = new Aposta(0);
 		money = new Creditos(200);
 		this.generateMao();
 	}
-	/*inicializa cada carta do jogador*/
+	/** 
+	* inicializa cada carta da mao do jogador
+	*/
 	public void generateMao() {
 		for(int i = 0; i < 5; i++) {
 			mao[i] = new Carta();
@@ -35,7 +39,7 @@ public class Jogador {
 		return money.getCreditos();
 	}
 	/**
-	 *@param k - atribui o valor k aos créditos
+	 *@param k - atribui o valor k aos crÃ©ditos
 	 */
 	public void setCreditos(int k) {
 		money.setCreditos(k);
@@ -47,21 +51,23 @@ public class Jogador {
 		return bet.getAposta();
 	}
 	/**
-	 *@param int k, o tanto que vale a aposta
+	 *@param int k - o tanto que vale a aposta
 	 *set a aposta e desconta esse valor do que saldo anterior
 	 */
 	public int setAposta(int k) throws IllegalArgumentException{
 		if(k <= this.getCreditos() ) {
 			this.bet.setAposta(k);
-			System.out.println("Aposta no valor de "+k+" créditos feita com sucesso!");
+			System.out.println("Aposta no valor de "+k+" crÃ©ditos feita com sucesso!");
 			this.setCreditos(this.getCreditos() - k);
 			System.out.println("Saldo:" + this.getCreditos());
-		}else throw new IllegalArgumentException("Valor não possuído");
+		}else throw new IllegalArgumentException("Valor nÃ£o possuÃ­do");
 		
 		return 1;
 	}
 
-	@Override
+	/**
+	* mÃ©todo que imprime as 5 cartas do jogador horizontalmente
+	*/
 	public java.lang.String toString(){
 		for(int i = 0; i < 5; i++) {
 			mao[i].getLine1();
@@ -91,7 +97,7 @@ public class Jogador {
 		return "";
 	}
 	/**
-	 * função que atualiza o quanto o jogador tem (saldo anterior+ganho com aposta)
+	 * funÃ§Ã£o que atualiza o quanto o jogador tem (saldo anterior+ganho com aposta)
 	 */
 	public void cashIn() {
 		this.money.setCreditos(this.bet.calcular(mao) + this.getCreditos());
