@@ -1,8 +1,12 @@
 public class Carta {
 	
 	int naipe, numero;
-	//Naipe: Paus, Copas, Espadas, Ouros;
+	//Naipe: Paus = @, Copas = #, Espadas = $, Ouros = %;
 	//Numero: 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A
+	
+	/**
+	* Método construtor
+	*/
 	public Carta() {
 		naipe = -1;
 		numero = -1;
@@ -59,8 +63,7 @@ public class Carta {
 		return "";
 	}
 	/**
-	 * @param n - indica o nai
-	 * pe
+	 * @param n - indica o naipe
 	 * @return - naipe em caracter
 	 * */
 	private String getSymbol(int n) {
@@ -78,26 +81,46 @@ public class Carta {
 		return "";
 	}
 	
-	/*
-	 * funções auxiliares para mostrar a Carta
-	 * */
+	/**
+	 * função auxiliar para mostrar a Carta
+	 */
 	public void getLine1() {
 		System.out.print("+-----+");
 	}
+	
+	/**
+	 * função auxiliar para mostrar a Carta
+	 */
 	public void getLine2() {
 		System.out.print("|  " + getNumber(numero) + "  |");
 	}
+	
+	/**
+	 * função auxiliar para mostrar a Carta
+	 */
 	public void getLine3() {
 		System.out.print("|  " + getSymbol(naipe) +"  |");
 	}
+	
+	/**
+	 * função auxiliar para mostrar a Carta
+	 */
 	public void getLine4() {
 		System.out.print("|     |");
 	}
+	
+	/**
+	 * função auxiliar para mostrar a Carta
+	 */
 	public void getLine5() {
 		System.out.print("+-----+");
 	}
 	
 	@Override
+	
+	/**
+	 * função que imprime uma carta
+	 */
 	public java.lang.String toString() {
 		getLine1();
 		System.out.println();
