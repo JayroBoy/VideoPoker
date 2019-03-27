@@ -5,7 +5,9 @@ public class Aposta {
 	private int[] freqnumero;
 	private int[] freqnaipe;
 	private int aposta;
-	
+	/*
+	 * Método Construtor que inicia todas as variaveis da classe com 0
+	 * */
 	public Aposta(int bet){
 		aposta = bet;
 		mult = 0;
@@ -22,21 +24,31 @@ public class Aposta {
 		}
 		
 	}
-	
+	/**
+	 *@param int k, o tanto que vale a aposta 
+	 */
 	public void setAposta(int k) {
 		aposta = k;
 	}
 	
+	/**
+	 *@return a aposta 
+	 */
 	public int getAposta() {
 		return aposta;
 	}
 	
+	/*Método que calcula a pontuação dado a sequencia de cartas que o 
+	 * jogador tem
+	 * @param Carta[] card tor com as 5 cartas que o jogador tem
+	 * @return o tanto de fichas ganhas com a aposta
+	 * */
 	public int calcular( Carta[] card) {
-	
+		/*percorre o vetor de cartas para indicar quais cartas estao na mao do jogador*/
 		for(int i = 0; i < 5; i++) {
 			naipe = card[i].getNaipe();
 			numero = card[i].getNumero();
-			
+			/*o vetor de frequencias do naipe é incrementado conforme aparece determinado naipe no vetor de cartas*/
 			switch(naipe) {
 				case 0:
 					freqnaipe[0] +=1;
@@ -53,7 +65,7 @@ public class Aposta {
 				default:
 					break;
 				}
-					
+			/*o vetor de frequencias dos numeros é incrementado conforme aparecem no vetor de cartas*/	
 				switch(numero) {
 				case 0:
 					freqnumero[0] +=1;
@@ -96,10 +108,11 @@ public class Aposta {
 				default:
 					break;
 				}
-			}			
+			}	
+		/*zera as variaveis para reutilizá-las*/
 		numero = 0;
 		naipe = 0;
-		
+		/*percorre o vetor de numeros para procurar as combinações que premiam o jogador*/
 		for(int i = 0; i < 13; i++) {
 			if(freqnumero[i] == 2) par++;
 			if(freqnumero[i] == 3) trinca++;
@@ -108,10 +121,12 @@ public class Aposta {
 					if(freqnumero[i] == 1 && (freqnumero[i-1] == 1 || i-1<0)) numero++;
 		}
 		
+		//percorre o vetor de naipes para procurar as combinações que premiam o jogador
 		for(int i = 1; i < 4; i++) {
 			if(freqnaipe[i] == 1 && (freqnaipe[i-1] == 1 || i-1<0)) naipe ++;
 		}
 		
+		/*atribuir a pontuação de acordo com as combinações */
 		if (par == 2) mult = 1;	//dois pares
 		if (naipe == 5) mult = 10; //flush
 		else if (trinca == 1) { 

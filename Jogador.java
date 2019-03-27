@@ -40,10 +40,16 @@ public class Jogador {
 	public void setCreditos(int k) {
 		money.setCreditos(k);
 	}
+	/**
+	 *@return a aposta 
+	 */
 	public int getAposta() {
 		return bet.getAposta();
 	}
-	
+	/**
+	 *@param int k, o tanto que vale a aposta
+	 *set a aposta e desconta esse valor do que saldo anterior
+	 */
 	public void setAposta(int k) throws IllegalArgumentException{
 		if(k <= this.getCreditos() ) {
 			this.money.setCreditos(this.getCreditos() - k);
@@ -82,8 +88,7 @@ public class Jogador {
 		return "";
 	}
 	/**
-	 * manda as cartas para o placar e ele devolve o multiplicador
-	 * @return o multiplicador
+	 * função que atualiza o quanto o jogador tem (saldo anterior+ganho com aposta)
 	 */
 	public void cashIn() {
 		this.money.setCreditos(this.bet.calcular(mao) + this.getCreditos());
