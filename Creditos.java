@@ -2,18 +2,20 @@
 public class Creditos {
 
 	private int valor;
-	/*método construtor que atribui k à quantidade de créditos */
+	/**
+	*mÃ©todo construtor que atribui k Ã  quantidade de crÃ©ditos
+	*/
 	public Creditos(int k) {
 		valor = k;
 	}
 	/**
-	 * @return taoks quantidade de creditos
+	 * @return quantidade de creditos
 	 * */
 	public int getCreditos(){
 		return valor;
 	}
 	/**
-	 * @param j Os creditos recebem +j ao que ja tinha
+	 * @param j - creditos 
 	 * */
 	public void setCreditos(int j) {
 		valor= j;
