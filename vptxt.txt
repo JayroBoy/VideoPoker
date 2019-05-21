@@ -1,0 +1,19 @@
+Bem-vindo ao VideoPoker EXTREME!\n
+As regras do jogo são simples:\n
+1 - Você faz uma aposta.\n        
+2 - Você pode trocar de cartas\n 
+duas vezes.\n                    
+3 - Você recebe um prêmio re-\n       
+lativo à sua aposta.\n              
+\n                                     
+Cada combinação de cartas multi-\n
+plica a sua aposta por um valor\n
+específico:\n                   
+*Dois Pares .................. 1
+*Trinca....................... 2
+*Straight..................... 5
+*Flush....................... 10
+*Full House.................. 20
+*Quadra...................... 50
+*Straight Flush............. 100
+*Royal Flush................ 200
