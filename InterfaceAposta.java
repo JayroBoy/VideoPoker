@@ -37,7 +37,6 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 		jp3.setLayout(new FlowLayout());
 		
 		desktop = new JDesktopPane(){
-			 
 	          Image im1 = (new ImageIcon("PNG\\PokerChipsExtreme.png")).getImage().getScaledInstance((int)(tk.getScreenSize().getWidth()*0.9),(int)(tk.getScreenSize().getHeight()*0.9), Image.SCALE_DEFAULT);
 	          public void paintComponent(Graphics g){        
 	        	  g.drawImage(im1,100,0,this);
@@ -95,17 +94,20 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 			
 			try {
 				int bet = Integer.parseInt(value);
-				System.out.println("AAAAAAAAAAAAAAAAAAAA");
-				
-				Aposta a = new Aposta(bet);
+				player.setAposta(bet);
+				//player.generateMao();
 				if (bet <= 0 || bet > this.player.getCreditos()) {
-					label.setText("Digite um VALOR VALIDO JUEMNTO");
+					label.setText("Digite um VALOR VÁLIDO");
 				} else {
-					label.setText("valor certo bunioo");
-
+					label.setText("Saldo de "+player.getCreditos());
+					this.setVisible(false);
+					this.dispose();
+					InterfaceCartas jojo = new InterfaceCartas(this.player);
+					jojo.setVisible(true);
 				}
+				
 			} catch(Exception ex) {
-				label.setText("Digite um VALOR VALIDO JUEMNTO");
+				label.setText("Digite um VALOR VÁLIDO");
 			}
 	
 			
