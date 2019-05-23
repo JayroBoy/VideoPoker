@@ -27,8 +27,9 @@ public class InterfacePoker extends JFrame implements ActionListener{
 		buttons = new JPanel();
 		buttons.setLayout(new GridLayout(1,3));
 		desktop = new JDesktopPane(){
-			 Toolkit tk = Toolkit.getDefaultToolkit();  
-	          Image im1 = (new ImageIcon("PNG\\aces.png")).getImage().getScaledInstance((int)tk.getScreenSize().getWidth(),(int)tk.getScreenSize().getHeight(), Image.SCALE_DEFAULT);
+			 Toolkit tk = Toolkit.getDefaultToolkit(); 
+			 //Pega a imagem e a redimensiona para que ela ocupe a tela inteira
+	          Image im1 = (new ImageIcon("src\\PNG\\aces.png")).getImage().getScaledInstance((int)tk.getScreenSize().getWidth(),(int)tk.getScreenSize().getHeight(), Image.SCALE_DEFAULT);
 	          public void paintComponent(Graphics g){        
 	        	  g.drawImage(im1,0,0,this);
 	        	  
@@ -68,7 +69,7 @@ public class InterfacePoker extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		//se o jogador clicar em jogar, abre a tela de aposta
 		if(e.getActionCommand().equals("confirma")) {
 			this.setVisible(false);
 			this.dispose();
@@ -76,12 +77,14 @@ public class InterfacePoker extends JFrame implements ActionListener{
 			InterfaceAposta frame = new InterfaceAposta(j);
 			frame.setVisible(true);
 		}
+		//se o jogador clicar em instruções, abre a tela de instruções
 		else if(e.getActionCommand().equals("info")) {
 			this.setVisible(false);
 			this.dispose();
 			Instrucoes frame = new Instrucoes();
 			frame.setVisible(true);
 		}
+		//se o jogador clicar em fechar o programa encerra
 		else if(e.getActionCommand().equals("fechar")) {
 			System.exit(0);
 		}

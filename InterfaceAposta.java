@@ -23,6 +23,8 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 	JTextField valor;
 	Jogador player;
 	JDesktopPane desktop;
+	int maxbet;
+	
 	public InterfaceAposta(Jogador player) {
 		Toolkit tk = Toolkit.getDefaultToolkit();  
 		jp = (JPanel) this.getContentPane();
@@ -36,14 +38,18 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 		jp3 = new JPanel();
 		jp3.setLayout(new FlowLayout());
 		
+		//ajusta a imagem
 		desktop = new JDesktopPane(){
-	          Image im1 = (new ImageIcon("PNG\\PokerChipsExtreme.png")).getImage().getScaledInstance((int)(tk.getScreenSize().getWidth()*0.9),(int)(tk.getScreenSize().getHeight()*0.9), Image.SCALE_DEFAULT);
+	          Image im1 = (new ImageIcon("src\\PNG\\PokerChipsExtreme.png")).getImage().getScaledInstance((int)(tk.getScreenSize().getWidth()*0.9),(int)(tk.getScreenSize().getHeight()*0.9), Image.SCALE_DEFAULT);
 	          public void paintComponent(Graphics g){        
 	        	  g.drawImage(im1,100,0,this);
 	        	  
 	          }
 	      };
 		
+	     
+	    this.player = player;
+	      
 		voltar = new JButton("Voltar");
 		voltar.setActionCommand("voltar");
 		voltar.addActionListener(this);
@@ -52,12 +58,12 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 		apostar.setActionCommand("apostar");
 		apostar.addActionListener(this);
 		
-		label = new JLabel("Digite sua aposta (entre 0 e 200):");
+		maxbet = this.player.getCreditos();
+		
+		label = new JLabel("Digite sua aposta (entre 0 e "+ maxbet +"):");
 		
 		valor = new JTextField();
 		valor.setPreferredSize(new Dimension(200,24));
-		
-		this.player = player;
 		
 		jp.add(desktop);
 		
@@ -80,13 +86,16 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		//se clicar em voltar, volta para o menu
 		if(e.getActionCommand().equals("voltar")) {
 			this.setVisible(false);
 			this.dispose();
 			
 			InterfacePoker ant = new InterfacePoker();
 			ant.setVisible(true);
-		} else if(e.getActionCommand().equals("apostar")) {
+		}
+		//se clicar em apostar, vai para a tela das cartas
+		else if(e.getActionCommand().equals("apostar")) {
 			//int bet=0,aux = 1;
 			
 			String value = this.valor.getText();
@@ -94,12 +103,12 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 			
 			try {
 				int bet = Integer.parseInt(value);
-				player.setAposta(bet);
+				this.player.setAposta(bet);
 				//player.generateMao();
-				if (bet <= 0 || bet > this.player.getCreditos()) {
+				if (bet <= 0 || bet > maxbet) {
 					label.setText("Digite um VALOR VÁLIDO");
 				} else {
-					label.setText("Saldo de "+player.getCreditos());
+					label.setText("Saldo de "+this.player.getCreditos());
 					this.setVisible(false);
 					this.dispose();
 					InterfaceCartas jojo = new InterfaceCartas(this.player);
@@ -108,9 +117,7 @@ public class InterfaceAposta extends JFrame implements ActionListener {
 				
 			} catch(Exception ex) {
 				label.setText("Digite um VALOR VÁLIDO");
-			}
-	
-			
+			}			
 		}
 		
 	}
